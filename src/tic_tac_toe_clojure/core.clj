@@ -12,10 +12,33 @@
 (defn display-numbered-board[]
   (println " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 "))
 
-(defn -main[]
-  
-   (print-message "Welcome to Tic Tac Toe!")
-   (print-message "This is how the board is numbered:")
+(defn new-board[]
+ [" " " " " " " " " " " " " " " "]
+)
+
+(defn update-board[board-vector]
+  (println "This is from the update-board method")  
+(assoc board-vector 1 "X")
+)
+
+(defn game-loop[]
+  (loop [turn-counter 0 
+	current-player 0
+        current-board [" " " " " " " "]] 
+   (if (= turn-counter 10)
+      current-player 
+      (recur
+        (+ turn-counter 1)
+        (- 1 current-player)
+        (println current-board)))))
+
+(defn start-the-game[]
+   (print-message "Welcome to Tic Tac Toe!\n")
+   (print-message "Player 1 will be X's and Player 2 will be O's. This is how the board is numbered:\n")
    (display-numbered-board)
-   (print-message "Who is first player? Please enter your name:")
-   (get-input-from-user))
+)
+
+(defn -main[]
+   (start-the-game)
+   (print-message "Player 1, where would you like to place your X?")
+   (game-loop))
