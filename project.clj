@@ -7,4 +7,4 @@
   :profiles {:dev {:dependencies [[speclj "3.0.1"]]}}
   :plugins [[speclj "3.0.1"]]
   :test-paths ["spec"]
-  :main tic-tac-toe_clojure.core)
+  :main tic_tac_toe_clojure.core)
