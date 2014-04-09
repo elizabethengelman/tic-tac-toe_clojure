@@ -12,14 +12,26 @@
 (defn display-numbered-board[]
   (println " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 "))
 
-(defn new-board[]
- [" " " " " " " " " " " " " " " "]
-)
+(defn update-board[board-vector, player-move]
+  (println(assoc board-vector player-move "X")))
 
-(defn update-board[board-vector]
-  (println "This is from the update-board method")  
-(assoc board-vector 1 "X")
-)
+(defn get-player1-move[]
+  (print-message "Player 1, where would you like to place your X?")
+  (get-input-from-user))
+
+(defn get-player2-move[]
+  (print-message "Player 2, where would you like to place your O?")
+  (get-input-from-user))
+ 
+(defn do-all-these-things[player, board]
+  (print-message player) 
+  (if (= player 0)
+     (def move (Integer. (get-player1-move)))
+     (def move (Integer. (get-player2-move))))
+  (print-message (class move))
+  (update-board board move)
+  board
+ )
 
 (defn game-loop[]
   (loop [turn-counter 0 
@@ -30,15 +42,13 @@
       (recur
         (+ turn-counter 1)
         (- 1 current-player)
-        (println current-board)))))
+        (do-all-these-things current-player current-board)))))
 
 (defn start-the-game[]
    (print-message "Welcome to Tic Tac Toe!\n")
    (print-message "Player 1 will be X's and Player 2 will be O's. This is how the board is numbered:\n")
-   (display-numbered-board)
-)
+   (display-numbered-board))
 
 (defn -main[]
    (start-the-game)
-   (print-message "Player 1, where would you like to place your X?")
    (game-loop))
