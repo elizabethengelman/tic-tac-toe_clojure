@@ -6,11 +6,6 @@
   (around [it]
     (with-out-str (it)))
   
-  ; (it "prints a welcome message"
-  ;   (should= "Welcome to Tic Tac Toe!\n"
-  ;   (with-out-str
-  ;   (print-message "Welcome to Tic Tac Toe!"))))
-
   ; (it "gets a message from the user"
   ;   (should= "first"
   ;   (with-in-str "first"
