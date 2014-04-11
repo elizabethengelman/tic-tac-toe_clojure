@@ -22,9 +22,25 @@
     (def mark "O"))
     mark)
 
-(defn update-board[current-board player-number]
-	 (print (get-mark player-number))
-	 (print (assoc current-board (get-move player-number) (get-mark player-number)))
-	 (assoc current-board (get-move player-number) (get-mark player-number)))
+(defn check-for-winner[board]
+    (println "X wins!")
+    true
+  )
 
+
+(defn update-board[current-board player-number]
+    (assoc current-board (get-move player-number) (get-mark player-number)))
+
+
+
+(defn print-board[current-board] ;NEED TO FIX THIS!
+    (print (get current-board 1) " |"
+    (get current-board 2) "|"
+    (get current-board 3) "\n"
+    (get current-board 4) "|"
+    (get current-board 5) "|"
+    (get current-board 6) "\n"
+    (get current-board 7) "|"
+    (get current-board 8) "|"
+    (get current-board 9) "\n"))    
 
