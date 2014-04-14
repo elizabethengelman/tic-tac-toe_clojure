@@ -9,19 +9,26 @@
    (print-message (create-numbered-board-for-display)))
 
 (defn game-loop[]
-  (loop [game 0
-         turn-counter 0 
-	       current-player 0 
-         current-board { 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}
-        ] 
-   (if (or (= turn-counter 10) (check-for-winner current-board))
-      current-player 
-      (recur
-        (print-board current-board)
-        (+ turn-counter 1)
-        (- 1 current-player)
-        (update-board current-board current-player)    
-        ))))
+  (let [current-board { 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}] 
+
+    (current-board 
+      (loop [game "in progress"
+             turn-counter 0 
+	           current-player 0 
+             current-board current-board
+             ] 
+      (if (= "over" (check-game-status current-board))
+        current-board 
+        (recur
+          (print-board current-board)
+          (+ turn-counter 1)
+          (- 1 current-player)
+          (update-board current-board current-player)    
+          ))))
+    (print-message "Game over!")
+    (print-message (print-game-status current-board)))
+    )
+
 
 (defn -main[]
    (start-the-game)
