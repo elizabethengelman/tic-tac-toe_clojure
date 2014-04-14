@@ -2,6 +2,17 @@
 	   (:use [tic_tac_toe_clojure.player]
            [tic_tac_toe_clojure.cli]))
 
+(def winning-lines 
+  [[1 2 3]
+   [4 5 6]
+   [7 8 9]
+   [1 4 7]
+   [2 5 8]
+   [3 6 9]
+   [1 5 9]
+   [3 5 7]
+   ])
+
 (defn display-empty-board[]
   (println "__|__|__\n__|__|__\n  |  |  ")) ; don't want display empty board to actually print!
 
@@ -23,17 +34,23 @@
     (def mark "O"))
     mark)
 
-
-(defn print-out-the-winner[player-number]
-  (if (= player-number 1)
-    (print-message "Player 1 wins!")
-    (print-message "Player 2 wins!")))
+(defn update-board[current-board player-number]
+    (assoc current-board (get-move player-number) (get-mark player-number)))
+  
+; (defn print-out-the-winner[player-number]
+;   (if (= player-number 1)
+;     (print-message "Player 1 wins!")
+;     (print-message "Player 2 wins!")))
 
 (defn is-there-a-winner[current-board]
   ; (if (=(get current-board 1) "X") 
   ;   "X"
   ;   nil
   "X"
+
+
+  winning-lines
+
   )
 
 (defn check-game-status[board]
@@ -45,24 +62,9 @@
       (not= "" (some #{""} (vals board)))
         "over"
       :else
-        "not over"))
+        "in progress"))
 
-    ;this should do this:
-    ;if (some #{""} (vals board)) != nil
-    ;return "over"  AND print out that there's a tie
-
-    ;if this method finds a winner, it prints out who the winner is AND returns true - probably should change to only do one thing, duh
-; if the board is full
-; "over"
-; if play1 wins 
-; "over"
-; if player2 wins
-; "over"
-; else
-; "not over"
-
-
-(defn print-game-status[current-board]
+(defn game-outcome[current-board]
   (let [winner (is-there-a-winner current-board)]
       (cond 
         (= winner "X")
@@ -71,11 +73,6 @@
           "Player 2 wins! Way to go O's!"
         :else "It's a tie!")))
 
-(defn its-a-tie?[board]
-  (= nil (some #{""} (vals board))))
-
-(defn update-board[current-board player-number]
-    (assoc current-board (get-move player-number) (get-mark player-number)))
 
 (defn print-board[current-board] ;NEED TO FIX THIS!
     (print (get current-board 1) " |"

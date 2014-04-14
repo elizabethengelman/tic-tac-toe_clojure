@@ -26,9 +26,8 @@
           (update-board current-board current-player)    
           ))))
     (print-message "Game over!")
-    (print-message (print-game-status current-board)))
+    (print-message (game-outcome current-board)))
     )
-
 
 (defn -main[]
    (start-the-game)
