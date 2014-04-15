@@ -11,7 +11,7 @@
 (defn game-loop[]
   (let [current-board { 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}] 
 
-    (current-board 
+      (def board   
       (loop [game "in progress"
              turn-counter 0 
 	           current-player 0 
@@ -24,11 +24,14 @@
           (+ turn-counter 1)
           (- 1 current-player)
           (update-board current-board current-player)    
-          ))))
+          ))) )
+    
+    (print-board board) 
     (print-message "Game over!")
-    (print-message (game-outcome current-board)))
+    (print-message (game-outcome board)))
     )
 
 (defn -main[]
    (start-the-game)
    (game-loop))
+  

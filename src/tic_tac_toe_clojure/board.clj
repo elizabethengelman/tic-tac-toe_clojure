@@ -57,12 +57,9 @@
 ;       )))
 
 (defn is-there-a-winner[current-board]
-  
-
-
   (and
-    (apply = (map #(get current-board %) (get winners 0)))
-    (not= (get current-board (first (get winners 0))) "")))
+    (not= (get current-board (first (get winners 0))) "")
+    (apply = (map #(get current-board %) (get winners 0)))))
 
 (defn check-game-status[board]
   (cond
@@ -72,7 +69,6 @@
       "over"
     :else
       "in progress"))
-
 
     ; (cond 
     ;   (= (is-there-a-winner board) "O")
@@ -86,8 +82,6 @@
 
 (defn game-outcome[current-board]
   (let [winner (is-there-a-winner current-board)]
-      (print-message (is-there-a-winner current-board))  
-
       (cond 
         (= winner true)
           "Player 1 wins! Way to go X's!"
