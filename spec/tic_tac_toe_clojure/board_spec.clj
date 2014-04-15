@@ -45,36 +45,37 @@
 
 
   ;IS-THERE-A-WINNER
-  (it "returns 'X' when X wins across a row"
+  (it "returns true when there is a win in a row 1-2-3"
     (let [board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
       (should= true (is-there-a-winner board))))
 
-  (it "returns 'O' when O wins across a row"
-    ; (let [board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
-    ;   (should= "O" (is-there-a-winner board)))
-    )
+  (it "returns true when there is a win in a row 4-5-6"
+    (let [board { 1 "" 2 "" 3 "" 4 "X" 5 "X" 6 "X" 7 "" 8 "" 9 ""}]
+      (should= true (is-there-a-winner board))))
 
-  (it "returns 'X' when X wins in a column"
-    ; (let [board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
-    ;   (should= "X" (is-there-a-winner board)))
-    )
+  (it "returns true when there is a win in a row 7-8-9"
+    (let [board { 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "X" 8 "X" 9 "X"}]
+      (should= true (is-there-a-winner board))))
 
-  (it "returns 'O' when O wins in a column"
-    ; (let [board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
-    ;   (should= "O" (is-there-a-winner board)))
-    )
+  (it "returns true when there is a win in a column 1-4-7"
+    (let [board { 1 "X" 2 "" 3 "" 4 "X" 5 "" 6 "" 7 "X" 8 "" 9 ""}]
+      (should= true (is-there-a-winner board))))
 
-  (it "returns 'X' when X wins diagonally"
-    ; (let [board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
-    ;   (should= "X" (is-there-a-winner board)))
-    )
+  (it "returns true when there is a win in a column 2-5-8"
+    (let [board { 1 "" 2 "X" 3 "" 4 "" 5 "X" 6 "" 7 "" 8 "X" 9 ""}]
+      (should= true (is-there-a-winner board))))
 
-  (it "returns 'O' when O wins diagonally"
-    ; (let [board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
-    ;   (should= "O" (is-there-a-winner board)))
-    )
+  (it "returns true when there is a win in a column 3-6-9"
+    (let [board { 1 "" 2 "" 3 "X" 4 "" 5 "" 6 "X" 7 "" 8 "" 9 "X"}]
+      (should= true (is-there-a-winner board))))
 
-  
+  (it "returns true when there is a win in diagonal 1-5-9"
+    (let [board { 1 "X" 2 "" 3 "" 4 "" 5 "X" 6 "" 7 "" 8 "" 9 "X"}]
+      (should= true (is-there-a-winner board))))
+
+  (it "returns true when there is a win in diagonal 1-5-9"
+    (let [board { 1 "" 2 "" 3 "X" 4 "" 5 "X" 6 "" 7 "X" 8 "" 9 ""}]
+      (should= true (is-there-a-winner board))))
 
   ;CHECK-GAME-STATUS
 

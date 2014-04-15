@@ -63,15 +63,12 @@
 (defn change-boolean [current-eval current-board winners-index]
   (if (= (its-a-winner current-board winners-index) true)
     true
-    false
-
-  )
-)
+    false))
 
 (defn is-there-a-winner[current-board]
   (def outcome (loop [winners-index 0
         there-is-a-winner []]
-    (if (= winners-index 7)
+    (if (> winners-index 7)
       there-is-a-winner
       (recur
         (+ winners-index 1)
@@ -79,11 +76,7 @@
     (print outcome)
     (if (= (some true? outcome) true)
       true
-      false)
-
-  )
-
-
+      false))
 
 (defn check-game-status[board]
   (cond
@@ -112,7 +105,6 @@
         (= winner "O")
           "Player 2 wins! Way to go O's!"
         :else "It's a tie!")))
-
 
 (defn print-board[current-board] ;NEED TO FIX THIS!
     (print (get current-board 1) " |"
