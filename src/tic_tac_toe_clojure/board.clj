@@ -2,7 +2,7 @@
 	   (:use [tic_tac_toe_clojure.player]
            [tic_tac_toe_clojure.cli]))
 
-(def winning-lines 
+(def winners
   [[1 2 3]
    [4 5 6]
    [7 8 9]
@@ -14,7 +14,7 @@
    ])
 
 (defn display-empty-board[]
-  (println "__|__|__\n__|__|__\n  |  |  ")) ; don't want display empty board to actually print!
+  (println "__|__|__\n__|__|__\n  |  |  ")) 
 
 (defn create-numbered-board-for-display[]
   " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 ") ; don't want this to to actually print!
@@ -42,32 +42,54 @@
 ;     (print-message "Player 1 wins!")
 ;     (print-message "Player 2 wins!")))
 
+; (defn is-there-a-winner[current-board]
+;   (loop [current-line-index 0
+;          current-line (get winners current-line-index)]
+;     (if (and
+;         (apply = (map #(get current-board %)current-line))
+;         (not= (get current-board (get current-line 0)) "")
+;         )
+;       (get current-board (get current-line 0))
+;       (recur
+;         (+ current-line-index 1)
+;         (print-message "this is the current line"))
+
+;       )))
+
 (defn is-there-a-winner[current-board]
-  ; (if (=(get current-board 1) "X") 
-  ;   "X"
-  ;   nil
-  "X"
+  
 
 
-  winning-lines
-
-  )
+  (and
+    (apply = (map #(get current-board %) (get winners 0)))
+    (not= (get current-board (first (get winners 0))) "")))
 
 (defn check-game-status[board]
-    (cond 
-      (= (is-there-a-winner board) "O")
-        "over"
-      (= (is-there-a-winner board) "X")
-        "over"
-      (not= "" (some #{""} (vals board)))
-        "over"
-      :else
-        "in progress"))
+  (cond
+    (is-there-a-winner board)
+      "over"
+    (not= "" (some #{""} (vals board)))    
+      "over"
+    :else
+      "in progress"))
+
+
+    ; (cond 
+    ;   (= (is-there-a-winner board) "O")
+    ;     "over"
+    ;   (= (is-there-a-winner board) "X")
+    ;     "over"
+    ;   (not= "" (some #{""} (vals board)))
+    ;     "over"
+    ;   :else
+    ;     "in progress"))
 
 (defn game-outcome[current-board]
   (let [winner (is-there-a-winner current-board)]
+      (print-message (is-there-a-winner current-board))  
+
       (cond 
-        (= winner "X")
+        (= winner true)
           "Player 1 wins! Way to go X's!"
         (= winner "O")
           "Player 2 wins! Way to go O's!"
