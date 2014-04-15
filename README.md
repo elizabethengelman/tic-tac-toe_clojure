@@ -1,4 +1,4 @@
-This is a Tic Tac Toe game, written in Clojure using Speclj as a testing framework. The first implementation will allow for human-vs-human play. Then, it will allow for a human to play against the computer. The user will be able to choose whether they play against a dumb computer player which chooses random moves, or a smart computer that using the minimax algorithm to choose its moves.
+This is a Tic Tac Toe game, written in Clojure using Speclj as a testing framework. The first implementation will allow for human-vs-human play. The next extension will allow for a human to play against the computer. The user will be able to choose whether they play against a dumb computer which chooses random moves, or a smart computer that uses the minimax algorithm to choose its moves.
 
 To run this program, clone the repo:
 
