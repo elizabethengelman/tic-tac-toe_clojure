@@ -53,13 +53,37 @@
 ;       (recur
 ;         (+ current-line-index 1)
 ;         (print-message "this is the current line"))
-
 ;       )))
 
-(defn is-there-a-winner[current-board]
+(defn its-a-winner [current-board winners-index]
   (and
-    (not= (get current-board (first (get winners 0))) "")
-    (apply = (map #(get current-board %) (get winners 0)))))
+    (not= (get current-board (first (get winners winners-index))) "")
+    (apply = (map #(get current-board %) (get winners winners-index)))))
+
+(defn change-boolean [current-eval current-board winners-index]
+  (if (= (its-a-winner current-board winners-index) true)
+    true
+    false
+
+  )
+)
+
+(defn is-there-a-winner[current-board]
+  (def outcome (loop [winners-index 0
+        there-is-a-winner []]
+    (if (= winners-index 7)
+      there-is-a-winner
+      (recur
+        (+ winners-index 1)
+        (into there-is-a-winner (repeat 1 (its-a-winner current-board winners-index)))))))
+    (print outcome)
+    (if (= (some true? outcome) true)
+      true
+      false)
+
+  )
+
+
 
 (defn check-game-status[board]
   (cond
