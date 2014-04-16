@@ -17,19 +17,17 @@
 	           current-player 0 
              current-board current-board
              ] 
-      (if (= "over" (check-game-status current-board))
+      (if (= true (game-over? current-board))
         current-board 
         (recur
           (print-board current-board)
           (+ turn-counter 1)
           (- 1 current-player)
-          (update-board current-board current-player)    
-          ))) )
+          (update-board current-board current-player)))))
     
     (print-board board) 
     (print-message "Game over!")
-    (print-message (game-outcome board)))
-    )
+    (print-message (game-outcome board))))
 
 (defn -main[]
    (start-the-game)

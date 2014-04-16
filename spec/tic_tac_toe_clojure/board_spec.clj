@@ -47,51 +47,48 @@
   ;IS-THERE-A-WINNER
   (it "returns true when there is a win in a row 1-2-3"
     (let [board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
-      (should= true (is-there-a-winner board))))
+      (should= true (winner? board))))
 
   (it "returns true when there is a win in a row 4-5-6"
     (let [board { 1 "" 2 "" 3 "" 4 "X" 5 "X" 6 "X" 7 "" 8 "" 9 ""}]
-      (should= true (is-there-a-winner board))))
+      (should= true (winner? board))))
 
   (it "returns true when there is a win in a row 7-8-9"
     (let [board { 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "X" 8 "X" 9 "X"}]
-      (should= true (is-there-a-winner board))))
+      (should= true (winner? board))))
 
   (it "returns true when there is a win in a column 1-4-7"
     (let [board { 1 "X" 2 "" 3 "" 4 "X" 5 "" 6 "" 7 "X" 8 "" 9 ""}]
-      (should= true (is-there-a-winner board))))
+      (should= true (winner? board))))
 
   (it "returns true when there is a win in a column 2-5-8"
     (let [board { 1 "" 2 "X" 3 "" 4 "" 5 "X" 6 "" 7 "" 8 "X" 9 ""}]
-      (should= true (is-there-a-winner board))))
+      (should= true (winner? board))))
 
   (it "returns true when there is a win in a column 3-6-9"
     (let [board { 1 "" 2 "" 3 "X" 4 "" 5 "" 6 "X" 7 "" 8 "" 9 "X"}]
-      (should= true (is-there-a-winner board))))
+      (should= true (winner? board))))
 
   (it "returns true when there is a win in diagonal 1-5-9"
     (let [board { 1 "X" 2 "" 3 "" 4 "" 5 "X" 6 "" 7 "" 8 "" 9 "X"}]
-      (should= true (is-there-a-winner board))))
+      (should= true (winner? board))))
 
   (it "returns true when there is a win in diagonal 1-5-9"
     (let [board { 1 "" 2 "" 3 "X" 4 "" 5 "X" 6 "" 7 "X" 8 "" 9 ""}]
-      (should= true (is-there-a-winner board))))
+      (should= true (winner? board))))
 
   ;CHECK-GAME-STATUS
-
-  (it "returns 'over' if there-is-a-winner returns 'X'"
+  (it "returns true if there-is-a-winner returns 'X'"
     (let [board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
-      (should= "over" (check-game-status board))))
+      (should= true (game-over? board))))
 
-
-  (it "returns 'over' if there-is-a-winner returns 'O'"
-    (let [board { 1 "O" 2 "O" 3 "O" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
-      (should= "over" (check-game-status board))))
-
-
-  (it "returns 'over' if there is a tie"
+  (it "returns true if there is a tie"
       (let [board { 1 "X" 2 "O" 3 "X" 4 "O" 5 "X" 6 "O" 7 "O" 8 "X" 9 "O"}]
-      (should= "over" (check-game-status board))))  
+      (should= true (game-over? board))))  
+
+  (it "returns false if the game is still in progess"
+    (let [board { 1 "X" 2 "" 3 "X" 4 "O" 5 "X" 6 "O" 7 "O" 8 "X" 9 "O"}]
+      (should= false (game-over? board))))  
 
   ;PRINT-GAME-STATUS
   (it "returns that player 1 wins"

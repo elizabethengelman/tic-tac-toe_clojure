@@ -55,54 +55,50 @@
 ;         (print-message "this is the current line"))
 ;       )))
 
-(defn its-a-winner [current-board winners-index]
+(defn its-a-winner?[current-board winners-index]
   (and
     (not= (get current-board (first (get winners winners-index))) "")
     (apply = (map #(get current-board %) (get winners winners-index)))))
 
-(defn change-boolean [current-eval current-board winners-index]
-  (if (= (its-a-winner current-board winners-index) true)
-    true
-    false))
+; (defn winner?[current-board]
+;   (def outcome (loop [winners-index 0
+;         there-is-a-winner []]
+;     (if (> winners-index 7)
+;       there-is-a-winner
+;       (recur
+;         (+ winners-index 1)
+;         (into there-is-a-winner (repeat 1 (its-a-winner current-board winners-index)))))))
+;     (print outcome)
+;     (if (= (some true? outcome) true)
+;       true
+;       false))
 
-(defn is-there-a-winner[current-board]
-  (def outcome (loop [winners-index 0
-        there-is-a-winner []]
-    (if (> winners-index 7)
+(defn winner?[current-board]
+  (loop [winners-index 0
+         there-is-a-winner false]
+    (if (or (> winners-index 7) (= there-is-a-winner true))
       there-is-a-winner
       (recur
         (+ winners-index 1)
-        (into there-is-a-winner (repeat 1 (its-a-winner current-board winners-index)))))))
-    (print outcome)
-    (if (= (some true? outcome) true)
+        (its-a-winner? current-board winners-index)))))
+
+
+
+(defn game-over?[board] 
+  (cond
+    (winner? board)
       true
+    (not= "" (some #{""} (vals board)))    
+      true
+    :else
       false))
 
-(defn check-game-status[board]
-  (cond
-    (is-there-a-winner board)
-      "over"
-    (not= "" (some #{""} (vals board)))    
-      "over"
-    :else
-      "in progress"))
-
-    ; (cond 
-    ;   (= (is-there-a-winner board) "O")
-    ;     "over"
-    ;   (= (is-there-a-winner board) "X")
-    ;     "over"
-    ;   (not= "" (some #{""} (vals board)))
-    ;     "over"
-    ;   :else
-    ;     "in progress"))
-
 (defn game-outcome[current-board]
-  (let [winner (is-there-a-winner current-board)]
+  (let [winner (winner? current-board)]
       (cond 
         (= winner true)
           "Player 1 wins! Way to go X's!"
-        (= winner "O")
+        (= winner true)
           "Player 2 wins! Way to go O's!"
         :else "It's a tie!")))
 
