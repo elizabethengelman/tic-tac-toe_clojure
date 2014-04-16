@@ -1,9 +1,6 @@
 (ns tic_tac_toe_clojure.player
-	(:use [tic_tac_toe_clojure.cli]))
-
-(defn is-a-number[str]
-  (let [n (read-string str)]
-       (if (number? n) n nil)))
+	(:use [tic_tac_toe_clojure.cli]
+				[tic_tac_toe_clojure.utility]))
 
 (defn ask-for-move[player-number]
 	(if (= player-number 0)
