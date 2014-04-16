@@ -5,7 +5,6 @@
 (defn create-new-board[]
   { 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""})
 
-
 (defn create-numbered-board-for-display[]
   " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 ") ; don't want this to to actually print!
 

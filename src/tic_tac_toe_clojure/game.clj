@@ -2,12 +2,6 @@
 	(:use [tic_tac_toe_clojure.player]
         [tic_tac_toe_clojure.rules]))
 
-(defn get-mark[player-number]
-  (if (= player-number 0)
-    (def mark "X")
-    (def mark "O"))
-    mark)
-
 (defn valid-move?[move current-board]
   (and 
     (= (get current-board move) "")
@@ -18,6 +12,12 @@
     (if (valid-move? move current-board)
       move
       (recur(ask-for-move player-number)))))
+
+(defn get-mark[player-number]
+  (if (= player-number 0)
+    (def mark "X")
+    (def mark "O"))
+    mark)
 
 (defn game-outcome[current-board]
   (cond 
