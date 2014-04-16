@@ -36,44 +36,13 @@
 
 (defn update-board[current-board player-number]
     (assoc current-board (get-move player-number) (get-mark player-number)))
-  
-; (defn print-out-the-winner[player-number]
-;   (if (= player-number 1)
-;     (print-message "Player 1 wins!")
-;     (print-message "Player 2 wins!")))
 
-; (defn is-there-a-winner[current-board]
-;   (loop [current-line-index 0
-;          current-line (get winners current-line-index)]
-;     (if (and
-;         (apply = (map #(get current-board %)current-line))
-;         (not= (get current-board (get current-line 0)) "")
-;         )
-;       (get current-board (get current-line 0))
-;       (recur
-;         (+ current-line-index 1)
-;         (print-message "this is the current line"))
-;       )))
-
-(defn its-a-winner?[current-board winners-index]
+(defn its-a-winner?[current-board winners-index] ;checks if the current line is a winner
   (and
     (not= (get current-board (first (get winners winners-index))) "")
     (apply = (map #(get current-board %) (get winners winners-index)))))
 
-; (defn winner?[current-board]
-;   (def outcome (loop [winners-index 0
-;         there-is-a-winner []]
-;     (if (> winners-index 7)
-;       there-is-a-winner
-;       (recur
-;         (+ winners-index 1)
-;         (into there-is-a-winner (repeat 1 (its-a-winner current-board winners-index)))))))
-;     (print outcome)
-;     (if (= (some true? outcome) true)
-;       true
-;       false))
-
-(defn winner?[current-board]
+(defn winner?[current-board] ; true if there is a winner, false if not. doesn't tell you who the winner is
   (loop [winners-index 0
          there-is-a-winner false]
     (if (or (> winners-index 7) (= there-is-a-winner true))
@@ -81,8 +50,6 @@
       (recur
         (+ winners-index 1)
         (its-a-winner? current-board winners-index)))))
-
-
 
 (defn game-over?[board] 
   (cond
@@ -93,16 +60,25 @@
     :else
       false))
 
-(defn game-outcome[current-board]
-  (let [winner (winner? current-board)]
-      (cond 
-        (= winner true)
-          "Player 1 wins! Way to go X's!"
-        (= winner true)
-          "Player 2 wins! Way to go O's!"
-        :else "It's a tie!")))
+(defn who-wins?[current-board]
+  (def winning-line (loop [winners-index 0
+                           there-is-a-winner false]
+    (if (= there-is-a-winner true)
+      (- winners-index 1)
+      (recur
+        (+ winners-index 1)
+        (its-a-winner? current-board winners-index)))))
+  (get current-board (get (get winners winning-line 0)0)))
 
-(defn print-board[current-board] ;NEED TO FIX THIS!
+(defn game-outcome[current-board]
+  (cond 
+    (= (who-wins? current-board) "X")
+      "Player 1 wins! Way to go X's!"
+    (= (who-wins? current-board) "O")
+      "Player 2 wins! Way to go O's!"
+    :else "It's a tie!"))
+
+(defn print-board[current-board] ;NEED TO FIX THIS - there has to be a more efficient way to do this.
     (print (get current-board 1) " |"
     (get current-board 2) "|"
     (get current-board 3) "\n"
@@ -112,4 +88,12 @@
     (get current-board 7) "|"
     (get current-board 8) "|"
     (get current-board 9) "\n"))    
+
+
+
+
+; TO DO
+;check to see if the winner is X or O, and print out the correct thing
+;verify that a user's move is a valid one - must be "" and between 1 and 9
+
 
