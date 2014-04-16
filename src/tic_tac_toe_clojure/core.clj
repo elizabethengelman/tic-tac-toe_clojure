@@ -18,7 +18,7 @@
 	           current-player 0 
              current-board current-board
              ] 
-      (if (= true (game-over? current-board))
+      (if (game-over? current-board)
         current-board 
         (recur
           (print-board current-board)
@@ -28,6 +28,8 @@
     (print-board board) 
     (print-message "Game over!")
     (print-message (game-outcome board))))
+
+
 
 (defn -main[]
    (start-the-game)

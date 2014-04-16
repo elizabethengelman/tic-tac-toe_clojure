@@ -1,4 +1,4 @@
-(ns tic-tac-toe_clojure.rules-spec
+(ns tic-tac-toe_clojure.rules_spec
   (:require [speclj.core :refer :all]
             [tic_tac_toe_clojure.rules :refer :all]))
 
