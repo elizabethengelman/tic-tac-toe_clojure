@@ -22,11 +22,17 @@
 (defn create-blank-board[]
 	{ 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""})
 
-(defn get-move[player-number]
-  (if (= player-number 0)
-    (def move (Integer. (get-player1-move)))
-    (def move (Integer. (get-player2-move))))
-    move)
+
+(defn valid-move?[move current-board]
+  (and 
+    (= (get current-board move) "")
+    (not= nil (some #{move} '(1 2 3 4 5 6 7 8 9))))) 
+
+(defn get-move[player-number current-board]
+  (loop [move (ask-for-move player-number)]
+    (if (valid-move? move current-board)
+      move
+      (recur(ask-for-move player-number)))))
 
 (defn get-mark[player-number]
   (if (= player-number 0)
@@ -35,7 +41,7 @@
     mark)
 
 (defn update-board[current-board player-number]
-    (assoc current-board (get-move player-number) (get-mark player-number)))
+    (assoc current-board (get-move player-number current-board) (get-mark player-number)))
 
 (defn its-a-winner?[current-board winners-index] ;checks if the current line is a winner
   (and
@@ -61,14 +67,16 @@
       false))
 
 (defn who-wins?[current-board]
-  (def winning-line (loop [winners-index 0
+  (def winning-line-index (loop [winners-index 0
                            there-is-a-winner false]
     (if (= there-is-a-winner true)
       (- winners-index 1)
       (recur
         (+ winners-index 1)
         (its-a-winner? current-board winners-index)))))
-  (get current-board (get (get winners winning-line 0)0)))
+  (get current-board (get (get winners winning-line-index)0)))  ;most nested get gives the vector of the winning line, ie [1 2 3]
+                                                                ;the next get gives the value at index 0, ie 1
+                                                                ;the next get gives us the value at 1 in the board, to give us an X or O
 
 (defn game-outcome[current-board]
   (cond 
@@ -77,6 +85,8 @@
     (= (who-wins? current-board) "O")
       "Player 2 wins! Way to go O's!"
     :else "It's a tie!"))
+
+
 
 (defn print-board[current-board] ;NEED TO FIX THIS - there has to be a more efficient way to do this.
     (print (get current-board 1) " |"
@@ -93,7 +103,6 @@
 
 
 ; TO DO
-;check to see if the winner is X or O, and print out the correct thing
 ;verify that a user's move is a valid one - must be "" and between 1 and 9
 
 
