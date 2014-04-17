@@ -3,41 +3,8 @@
           [tic_tac_toe_clojure.player] 
           [tic_tac_toe_clojure.cli]
           [tic_tac_toe_clojure.rules]
-          [tic_tac_toe_clojure.game]))
- 
-(defn ask-computer-or-human[]
-  (print-message "Please enter who you would you like to play against: a human (type in 'human') or a dumb computer (type in 'dumb')."))
-
-(defn set-opponent[]
-  (if (= (get-input-from-user) "dumb")
-    (def opponent "dumb computer")
-    (def opponent "human")))
-
-
-(defn start-the-game[]
-   (print-message "Welcome to Tic Tac Toe!\n")
-   (print-message "Player 1 will be X's and Player 2 will be O's. This is how the board is numbered:\n")
-   (print-message (create-numbered-board-for-display)))
-
-(defn change-player[opponent current-player]
-    (cond 
-      (= opponent "dumb computer")
-        (if (= current-player 0)
-          2
-          0)
-      (= opponent "human")
-        (- 1 current-player)))
-
-(defn first-or-second[]
-  (print-message "Would you like to go first or second?")
-  (if (= (get-input-from-user) "first")
-    0
-    2))
-
-(defn set-starter[]
-  (if (= opponent "dumb computer")
-    (def starter (first-or-second))
-    (def starter (Integer. 0))))
+          [tic_tac_toe_clojure.game]
+          [tic_tac_toe_clojure.setup]))
 
 (defn game-loop[opponent current-player]
   (let [current-board (create-new-board)] 
@@ -59,21 +26,18 @@
 
 (defn -main[]
    (start-the-game)
-   (ask-computer-or-human)
+   (ask-for-opponent)
    (set-opponent)
    (set-starter)
-   (print "this is the opponent you've chosen: "opponent "\n")
    (game-loop opponent starter))
   
-
-
 
 ; human 1 : 0
 ; human 2 : 1
 ; dumb compter : 2
 
 ;TODO
-  ;user chooses who goes first
-  ;user chooses if they want to play against the computer
-      ; or another human
-  ;
+;make sure that is prints that the computer won
+;finish testing
+;clean up game class - can this be split into another class?
+;start refactoring - think about OCP
