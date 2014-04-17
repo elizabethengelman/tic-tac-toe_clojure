@@ -1,14 +1,16 @@
 (ns tic_tac_toe_clojure.game
 	(:use [tic_tac_toe_clojure.player]
         [tic_tac_toe_clojure.rules]
-        [tic_tac_toe_clojure.computer]
         [tic_tac_toe_clojure.cli]))
 
-(defn valid-move?[move current-board]
-  (and 
-    (= (get current-board move) "")
-    (not= nil (some #{move} '(1 2 3 4 5 6 7 8 9))))) 
-
+(defn change-player[opponent current-player]
+    (cond 
+      (= opponent "dumb computer")
+        (if (= current-player 0)
+          2
+          0)
+      (= opponent "human")
+        (- 1 current-player)))
 
 (defn get-computer-move[current-board]
   (print-message "The computer is going...")
@@ -38,6 +40,9 @@
     (def mark "O"))
     mark)
 
+(defn update-board[current-board player-number] ;perhaps this should be in the game class
+    (assoc current-board (get-move player-number current-board) (get-mark player-number)))
+
 (defn game-outcome[current-board]
   (if (winner? current-board)
     (cond 
@@ -45,5 +50,5 @@
         "Player 1 wins! Way to go X's!"
      (= (who-wins? current-board) "O")
         "Player 2 wins! Way to go O's!")
-    "It's a tie!"))
+        "It's a tie!"))
 

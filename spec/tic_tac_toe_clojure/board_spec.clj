@@ -15,12 +15,6 @@
       (should= " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 "
       (create-numbered-board-for-display))))
 
-  (describe "update-board"
-    (it "updates a given board"
-      (should= { 1 "" 2 "O" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""} 
-        (with-in-str "2"
-        (update-board {1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""} 1)))))
-
   (describe "print-board"
     (it "prints the current board"
       (let [board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]

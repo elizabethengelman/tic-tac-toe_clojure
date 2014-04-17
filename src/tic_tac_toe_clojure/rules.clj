@@ -46,10 +46,10 @@
   (get current-board (get (get winners winning-line-index)0)))  ;most nested get gives the vector of the winning line, ie [1 2 3]
                                                                 ;the next get gives the value at index 0, ie 1
                                                               ;the next get gives us the value at 1 in the board, to give us an X or O
-
-
-
-
+(defn valid-move?[move current-board] ;should this be in game or rules?
+  (and 
+    (= (get current-board move) "")
+    (not= nil (some #{move} '(1 2 3 4 5 6 7 8 9))))) 
 
 
 
