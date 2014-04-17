@@ -15,4 +15,4 @@
     (get current-board 6) "\n"
     (get current-board 7) "|"
     (get current-board 8) "|"
-    (get current-board 9) "\n"))    
+    (get current-board 9) "\n"))

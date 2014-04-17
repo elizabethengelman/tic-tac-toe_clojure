@@ -6,7 +6,7 @@
         [tic_tac_toe_clojure.board]))
 
 (defn switch-player[opponent current-player]
-    (cond 
+    (cond
       (= opponent "dumb computer")
         (if (= current-player 0)
           2
@@ -14,13 +14,13 @@
       (= opponent "smart computer")
         (if (= current-player 0)
           3
-          0)  
+          0)
       (= opponent "human")
         (- 1 current-player)))
 
 (defn get-move[player-number current-board turn-number]
   (print "player number: " player-number)
-  (cond 
+  (cond
     (= player-number 0)
       (get-player-move player-number current-board)
     (= player-number 1)
@@ -40,7 +40,7 @@
     (assoc current-board move mark))
 
 (defn game-outcome[current-board]
-  (cond 
+  (cond
     (= (winner? current-board) "X")
         "Player 1 wins! Way to go X's!"
     (= (winner? current-board) "O")
