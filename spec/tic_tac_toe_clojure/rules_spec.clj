@@ -69,4 +69,3 @@
 		(it "returns false if the move is out of the scope of the board"
 			(let [current-board { 1 "" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
 				(should= false (valid-move? 0 current-board))))))
-	

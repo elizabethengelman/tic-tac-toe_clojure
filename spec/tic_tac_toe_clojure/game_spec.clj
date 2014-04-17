@@ -11,7 +11,7 @@
       (should= 1 (switch-player "human" 0)))
     (it "returns 0 or 2 if the user is playing the computer"
       (should= 2 (switch-player "dumb computer" 0))))
-  
+
   (describe "get-move"
     (it "gets the human move if the player number is 1"
       (let [current-board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]

@@ -8,7 +8,7 @@
    (print-message (create-numbered-board-for-display)))
 
 (defn ask-for-opponent[]
-  (print-message "Please enter who you would you like to play against: 
+  (print-message "Please enter who you would you like to play against:
     a human (type in 'human')
     dumb computer (type in 'dumb computer')
     smart computer (type in 'smart computer')."))

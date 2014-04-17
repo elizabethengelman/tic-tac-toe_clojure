@@ -52,4 +52,3 @@
   (print-board current-board)
   (print-message "Game over!")
   (print-message (game-outcome current-player)))
-
