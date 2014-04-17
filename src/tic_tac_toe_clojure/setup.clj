@@ -15,11 +15,17 @@
     (def opponent "dumb computer")
     (def opponent "human")))
 
-(defn first-or-second[]
-  (print-message "Would you like to go first or second?")
-  (if (= (get-input-from-user) "first")
+(defn ask-first-or-second[]
+	(print-message "Would you like to go first or second?"))
+
+(defn get-first-or-second-input[]
+	(if (= (get-input-from-user) "first")
     0
     2))
+
+(defn first-or-second[]
+  (ask-first-or-second)
+  (get-first-or-second-input))
 
 (defn set-starter[]
   (if (= opponent "dumb computer")
