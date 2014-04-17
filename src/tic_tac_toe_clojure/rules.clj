@@ -35,13 +35,14 @@
       false))
 
 (defn who-wins?[current-board]
-  (def winning-line-index (loop [winners-index 0
-                                 there-is-a-winner false]
-    (if (= there-is-a-winner true)
-      (- winners-index 1)
-      (recur
-        (+ winners-index 1)
-        (its-a-winner? current-board winners-index)))))
+  (def winning-line-index 
+    (loop [winners-index 0
+           there-is-a-winner false]
+      (if (= there-is-a-winner true)
+        (- winners-index 1)
+        (recur
+          (+ winners-index 1)
+          (its-a-winner? current-board winners-index)))))
   (get current-board (get (get winners winning-line-index)0)))  ;most nested get gives the vector of the winning line, ie [1 2 3]
                                                                 ;the next get gives the value at index 0, ie 1
                                                               ;the next get gives us the value at 1 in the board, to give us an X or O
