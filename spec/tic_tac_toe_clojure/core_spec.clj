@@ -12,6 +12,12 @@
       (with-out-str
         (start-the-game)))))
 
+  (describe "ask-computer-or-human"
+  	(it "asks the user who they would like to play: a human or a computer"
+  		(should= "Please enter who you would you like to play against: a human (type in 'human') or a dumb computer (type in 'dumb').\n"
+  			(with-out-str
+  				(ask-computer-or-human)))))
+
   (describe "game-loop"
   	(it "runs through a game, until game-over? evals to true")))
 
