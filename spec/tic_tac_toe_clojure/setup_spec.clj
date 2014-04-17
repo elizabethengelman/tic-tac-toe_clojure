@@ -29,6 +29,7 @@
     		(should= "Would you like to go first or second?\n"
     			(with-out-str
     				(ask-first-or-second)))))
+
     (describe "get-first-or-second-input"
     	(it "returns the player-number 0 if the user wants to go first"
     		(should= 0
@@ -64,5 +65,6 @@
             (should= 3
                 (with-in-str "second"
                 (set-starter "smart computer")))))
+
 
 
