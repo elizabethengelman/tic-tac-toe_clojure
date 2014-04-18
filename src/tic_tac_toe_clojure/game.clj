@@ -40,7 +40,7 @@
     (def mark "O"))
     mark)
 
-(defn update-board[current-board player-number] ;perhaps this should be in the game class
+(defn update-board[current-board player-number] 
     (assoc current-board (get-move player-number current-board) (get-mark player-number)))
 
 (defn game-outcome[current-board]
@@ -48,7 +48,7 @@
     (cond 
       (= (who-wins? current-board) "X")
         "Player 1 wins! Way to go X's!"
-     (= (who-wins? current-board) "O")
+      (= (who-wins? current-board) "O")
         "Player 2 wins! Way to go O's!")
         "It's a tie!"))
 
