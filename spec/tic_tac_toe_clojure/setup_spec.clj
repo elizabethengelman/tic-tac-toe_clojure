@@ -44,13 +44,7 @@
     				(get-first-or-second-input))))
 
 
-    	(describe "set-starter"
+    	(describe "-starter"
     		(it "sets the starting player, depending on user inputer")))
-   
 
 
-  ; (describe "ask-computer-or-human"
-  ; 	(it "asks the user who they would like to play: a human or a computer"
-  ; 		(should= "Please enter who you would you like to play against: a human (type in 'human') or a dumb computer (type in 'dumb').\n"
-  ; 			(with-out-str
-  ; 				(ask-for-opponent)))))

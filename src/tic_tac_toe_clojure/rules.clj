@@ -11,12 +11,12 @@
    [3 5 7]
    ])
 
-(defn its-a-winner?[current-board winners-index] ;checks if the current line is a winner
+(defn its-a-winner?[current-board winners-index] 
   (and
     (not= (get current-board (first (get winners winners-index))) "")
     (apply = (map #(get current-board %) (get winners winners-index)))))
 
-(defn winner?[current-board] ; true if there is a winner, false if not. doesn't tell you who the winner is
+(defn winner?[current-board] 
   (loop [winners-index 0
          there-is-a-winner false]
     (if (or (> winners-index 7) (= there-is-a-winner true))
@@ -43,17 +43,11 @@
         (recur
           (+ winners-index 1)
           (its-a-winner? current-board winners-index)))))
-  (get current-board (get (get winners winning-line-index)0)))  ;most nested get gives the vector of the winning line, ie [1 2 3]
+  (get current-board (get (get winners winning-line-index)0)))  ;this is messy - how do i refactor this?
+                                                                ;most nested get gives the vector of the winning line, ie [1 2 3]
                                                                 ;the next get gives the value at index 0, ie 1
-                                                              ;the next get gives us the value at 1 in the board, to give us an X or O
+                                                                ;the next get gives us the value at 1 in the board, to give us an X or O
 (defn valid-move?[move current-board] ;should this be in game or rules?
   (and 
     (= (get current-board move) "")
     (not= nil (some #{move} '(1 2 3 4 5 6 7 8 9))))) 
-
-
-
-
-
-
-
