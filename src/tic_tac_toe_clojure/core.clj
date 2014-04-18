@@ -18,26 +18,13 @@
         (recur
           (print-board current-board)
           (+ turn-counter 1)
-          (change-player opponent current-player)
+          (switch-player opponent current-player)
           (update-board current-board current-player)))))
-    (print-board board) 
-    (print-message "Game over!")
-    (print-message (game-outcome board))))
+    (goodbye-messages current-player board)))
 
 (defn -main[]
    (start-the-game)
-   (ask-for-opponent)
-   (set-opponent)
+   (get-opponent)
    (set-starter)
    (game-loop opponent starter))
   
-
-; human 1 : 0
-; human 2 : 1
-; dumb compter : 2
-
-;TODO
-;make sure that is prints that the computer won
-;finish testing
-;clean up game class - can this be split into another class?
-;start refactoring - think about OCP

@@ -16,4 +16,12 @@
     (it "gets move from the user"
       (should= 2
       (with-in-str "2"
-      (get-move-from-player))))))
+      (get-move-from-player)))))
+
+  (describe "get-human-move"
+    (it "gets the move of the current player if its a valid move"
+      (let [current-board { 1 "" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
+        (should= 1 
+          (with-in-str "1"
+          (get-player-move 0 current-board)))))
+    (it "continues to prompt player if they input an invalid move")))
