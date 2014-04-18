@@ -21,6 +21,10 @@
   (ask-for-opponent)
   (set-opponent))
 
+(defn get-opponent[]
+  (ask-for-opponent)
+  (set-opponent))
+
 (defn ask-first-or-second[]
 	(print-message "Would you like to go first or second?"))
 

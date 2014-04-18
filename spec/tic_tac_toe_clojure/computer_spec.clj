@@ -1,7 +1,7 @@
 (ns tic-tac-toe_clojure.computer_spec
   (:require [speclj.core :refer :all]
             [tic_tac_toe_clojure.computer :refer :all]))
- 
+
 (describe "get-computer-move"
   (it "gets a random, valid move"
     (let [current-board { 1 "" 2 "X" 3 "X" 4 "O" 5 "O" 6 "X" 7 "O" 8 "X" 9 "X"}]
@@ -40,7 +40,7 @@
 (describe "run-minimax"
 	(it "returns the score?"
 		(let [current-board { 1 "X" 2 "X" 3 "" 4 "O" 5 "O" 6 "" 7 "X" 8 "X" 9 "O"}]
-			(should= '((0) 1)	
+			(should= '((0) 1)
 				(run-minimax current-board "O")))))
 
 (describe "get-best-move"
@@ -48,13 +48,4 @@
 		(let [current-board { 1 "X" 2 "X" 3 "" 4 "O" 5 "O" 6 "" 7 "X" 8 "X" 9 "O"}]
 			(should= 6
 				(get-best-move current-board "O")))))
-
-
-
-
-
-
-
-
-
 

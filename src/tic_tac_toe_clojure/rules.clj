@@ -36,7 +36,8 @@
     (not= "" (some #{""} (vals board)))
       true
     :else
-      false))                                                             ;the next get gives the value at index 0, ie 1
+      false))                                                     ;the next get gives the value at index 0, ie 1
+
                                                                 ;the next get gives us the value at 1 in the board, to give us an X or O
 (defn valid-move?[move current-board] ;should this be in game or rules?
   (and
