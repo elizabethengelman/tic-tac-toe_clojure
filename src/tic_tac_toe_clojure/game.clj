@@ -11,6 +11,10 @@
         (if (= current-player 0)
           2
           0)
+      (= opponent "smart computer")
+        (if (= current-player 0)
+          3
+          0)  
       (= opponent "human")
         (- 1 current-player)))
 
@@ -21,7 +25,9 @@
     (= player-number 1)
       (get-player-move player-number current-board)
     (= player-number 2)
-      (get-computer-move current-board)))
+      (get-computer-move current-board)
+    (= player-number 3)
+      (get-smart-move current-board)))
 
 (defn get-mark[player-number]
   (if (= player-number 0)

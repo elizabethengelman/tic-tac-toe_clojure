@@ -8,7 +8,10 @@
    (print-message (create-numbered-board-for-display)))
 
 (defn ask-for-opponent[]
-  (print-message "Please enter who you would you like to play against: a human (type in 'human') or a dumb computer (type in 'dumb computer')."))
+  (print-message "Please enter who you would you like to play against: 
+    a human (type in 'human')
+    dumb computer (type in 'dumb computer')
+    smart computer (type in 'smart computer')."))
 
 (defn set-opponent[]
   (let [opponent (get-input-from-user)]
@@ -31,6 +34,6 @@
   (get-first-or-second-input))
 
 (defn set-starter[opponent]
-  (if (= opponent "dumb computer")
+  (if (or (= opponent "dumb computer") (= opponent "smart computer"))
     (get-starter)
     (Integer. 0)))
