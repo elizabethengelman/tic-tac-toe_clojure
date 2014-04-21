@@ -24,4 +24,5 @@
         (should= 1 
           (with-in-str "1"
           (get-player-move 0 current-board)))))
+    
     (it "continues to prompt player if they input an invalid move")))

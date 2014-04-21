@@ -14,7 +14,7 @@
 
 	(describe "ask-for-opponent"
 		(it "asks if the user would like to play against the computer or another human"
-			(should= "Please enter who you would you like to play against: a human (type in 'human') or a dumb computer (type in 'dumb computer').\n"
+			(should= "Please enter who you would you like to play against: a human (type in 'human'), dumb computer (type in 'dumb computer'), or a smart computer (type in 'smart computer').\n"
 				(with-out-str
 					(ask-for-opponent)))))
 
@@ -41,7 +41,6 @@
     				(get-first-or-second-input)))))
 
     (describe "set-starter"
-
         (it "returns 0 if the user is playing again another human"
             (should= 0 (set-starter "human")))
 
