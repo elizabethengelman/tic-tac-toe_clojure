@@ -18,14 +18,11 @@
 				(with-out-str
 					(ask-for-opponent)))))
 
-	(describe "set-opponent"
-		(it "sets opponent to 'dumb computer' if the user enters 'dumb'"
-	; 		(let [opponent "dumb computer"]
-	; 		(should= opponent
-	; 			(with-in-str "dumb"
-	; 			(set-opponent))))))
-		))
-
+	(describe "get-opponent"
+		(it "gets which opponent the user wants to play against"
+		  (should= "dumb computer"
+		  	(with-in-str "dumb"
+			(get-opponent)))))
 
     (describe "first-or-second"
     	(it "asks the user if they would like to go first or second"
@@ -44,7 +41,7 @@
     				(get-first-or-second-input))))
 
 
-    	(describe "-starter"
+    	(describe "starter"
     		(it "sets the starting player, depending on user inputer")))
 
 
