@@ -24,7 +24,6 @@
       (print-board board) 
       (print-message "Game over!")
       (print-message (game-outcome board))))
-    
 
 (defn -main[]
    (start-the-game)
