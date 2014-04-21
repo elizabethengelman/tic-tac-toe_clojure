@@ -7,7 +7,6 @@
     (let [current-board { 1 "" 2 "X" 3 "X" 4 "O" 5 "O" 6 "X" 7 "O" 8 "X" 9 "X"}]
       (should= 1 (get-computer-move current-board)))))
 
-
 (describe "get-score"
 	(it "returns -1 if the human (X) will win"
 		(let [current-board { 1 "" 2 "X" 3 "X" 4 "O" 5 "O" 6 "X" 7 "O" 8 "X" 9 "X"}]
