@@ -47,16 +47,15 @@
                     (get-first-or-second-input "smart computer")))))
 
     (describe "set-starter"
-        (it "returns 0 if the user is playing again another human"
+      (it "returns 0 if the user is playing again another human"
             (should= 0 (set-starter "human")))
 
-    	(it "returns 0, if the user wants to go first vs. the computer"
+      (it "returns 0, if the user wants to go first vs. the computer"
             (should= 0
                 (with-in-str "first"
                 (set-starter "dumb computer")))))
 
-
-        (it "returns 2 if the user wants to go second vs. the dumb computer"
+      (it "returns 2 if the user wants to go second vs. the dumb computer"
             (should= 2
                 (with-in-str "second"
                 (set-starter "dumb computer"))))
@@ -65,6 +64,5 @@
             (should= 3
                 (with-in-str "second"
                 (set-starter "smart computer")))))
-
 
 
