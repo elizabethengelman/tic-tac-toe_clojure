@@ -1,14 +1,14 @@
 (ns tic_tac_toe_clojure.rules)
 
 (def winners
-  [[1 2 3]
-   [4 5 6]
-   [7 8 9]
-   [1 4 7]
-   [2 5 8]
-   [3 6 9]
-   [1 5 9]
-   [3 5 7]
+  [[1 2 3] ;0 
+   [4 5 6] ;1
+   [7 8 9] ;2
+   [1 4 7] ;3
+   [2 5 8] ;4
+   [3 6 9] ;5
+   [1 5 9] ;6
+   [3 5 7] ;7
    ])
 
 (defn its-a-winner?[current-board winners-index] 
@@ -17,13 +17,17 @@
     (apply = (map #(get current-board %) (get winners winners-index)))))
 
 (defn winner?[current-board] 
-  (loop [winners-index 0
-         there-is-a-winner false]
-    (if (or (> winners-index 7) (= there-is-a-winner true))
-      there-is-a-winner
-      (recur
-        (+ winners-index 1)
-        (its-a-winner? current-board winners-index)))))
+  (def winning-line (loop [
+         there-is-a-winner false
+         winners-index 0]
+    (if (or (= there-is-a-winner true) (= winners-index 8))
+      winners-index
+       (recur
+          (its-a-winner? current-board winners-index)
+          (+ winners-index 1)))))
+    (if (< winning-line 8)
+      (get current-board (get(get winners (- winning-line 1)) 0))
+      nil))
 
 (defn game-over?[board] 
   (cond
@@ -32,20 +36,7 @@
     (not= "" (some #{""} (vals board)))    
       true
     :else
-      false))
-
-(defn who-wins?[current-board]
-  (def winning-line-index 
-    (loop [winners-index 0
-           there-is-a-winner false]
-      (if (= there-is-a-winner true)
-        (- winners-index 1)
-        (recur
-          (+ winners-index 1)
-          (its-a-winner? current-board winners-index)))))
-  (get current-board (get (get winners winning-line-index)0)))  ;this is messy - how do i refactor this?
-                                                                ;most nested get gives the vector of the winning line, ie [1 2 3]
-                                                                ;the next get gives the value at index 0, ie 1
+      false))                                                             ;the next get gives the value at index 0, ie 1
                                                                 ;the next get gives us the value at 1 in the board, to give us an X or O
 (defn valid-move?[move current-board] ;should this be in game or rules?
   (and 
