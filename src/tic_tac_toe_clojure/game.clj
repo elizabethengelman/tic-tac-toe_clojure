@@ -35,17 +35,17 @@
     (def mark "O"))
     mark)
 
-(defn update-board[current-board player-number] 
+(defn update-board[current-board player-number] ;get move needs to be given to this board, instead of calling get-move
     (assoc current-board (get-move player-number current-board) (get-mark player-number)))
 
 (defn game-outcome[current-board]
-  (if (winner? current-board)
-    (cond 
-      (= (who-wins? current-board) "X")
+  (cond 
+    (= (winner? current-board) "X")
         "Player 1 wins! Way to go X's!"
-      (= (who-wins? current-board) "O")
-        "Player 2 wins! Way to go O's!")
-        "It's a tie!"))
+    (= (winner? current-board) "O")
+        "Player 2 wins! Way to go O's!"
+    :else
+      "It's a tie!"))
 
 (defn goodbye-messages[current-player current-board]
   (print-board current-board)

@@ -14,7 +14,7 @@
 
 	(describe "ask-for-opponent"
 		(it "asks if the user would like to play against the computer or another human"
-			(should= "Please enter who you would you like to play against: a human (type in 'human'), dumb computer (type in 'dumb computer'), or a smart computer (type in 'smart computer').\n"
+			(should= "Please enter who you would you like to play against: \n    a human (type in 'human')\n    dumb computer (type in 'dumb computer')\n    smart computer (type in 'smart computer').\n"
 				(with-out-str
 					(ask-for-opponent)))))
 

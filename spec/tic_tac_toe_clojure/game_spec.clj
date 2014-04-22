@@ -31,5 +31,5 @@
   		(let [current-board { 1 "O" 2 "O" 3 "O" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
   			(should= "Player 2 wins! Way to go O's!" (game-outcome current-board))))
   	(it "returns that there's a tie"
-  		(let [current-board { 1 "O" 2 "X" 3 "O" 4 "X" 5 "O" 6 "X" 7 "O" 8 "O" 9 "X"}]
-  			(should= "Player 2 wins! Way to go O's!" (game-outcome current-board))))))
+  		(let [current-board { 1 "X" 2 "O" 3 "X" 4 "X" 5 "O" 6 "X" 7 "O" 8 "X" 9 "O"}]
+  			(should= "It's a tie!" (game-outcome current-board))))))
