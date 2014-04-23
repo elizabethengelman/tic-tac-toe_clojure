@@ -25,3 +25,15 @@
 	(it "returns the keys of all the availble moves on the board"
 		(let [current-board { 1 "X" 2 "O" 3 "X" 4 "" 5 "O" 6 "" 7 "" 8 "" 9 "O"}]
 			(should= [4 6 7 8] (available-moves current-board)))))
+
+(describe "switch-players"
+	(it "returns computer if the current player is human"
+		(should= "computer" (switch-players "human")))
+	(it "returns human if the current player is computer"
+		(should= "human" (switch-players "computer"))))
+
+(describe "minimax"
+	(it "returns the correct move"
+		(let [current-board { 1 "" 2 "X" 3 "O" 4 "" 5 "X" 6 "" 7 "" 8 "" 9 "O"}]
+			(should= 8	
+				(run-minimax)))))

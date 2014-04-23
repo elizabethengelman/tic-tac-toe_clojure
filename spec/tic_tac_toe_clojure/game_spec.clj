@@ -12,6 +12,13 @@
     (it "returns 0 or 2 if the user is playing the computer"
       (should= 2 (switch-player "dumb computer" 0))))
   
+  (describe "get-move"
+    (it "gets the human move if the player number is 1"
+      (let [current-board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
+        (should= 9
+          (with-in-str "9"
+            (get-move 0 current-board))))))
+
   (describe "get-mark"
   	(it "gets the current player's mark (X or O)"
     	(should= "X" (get-mark 0))
@@ -19,9 +26,7 @@
 
   (describe "update-board"
     (it "updates a given board"
-      (should= { 1 "" 2 "O" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""} 
-        (with-in-str "2"
-        (update-board {1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""} 1)))))
+      (should= { 1 "" 2 "O" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""} (update-board {1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""} 2 "O"))))
 
   (describe "game-outcome"
   	(it "returns that player 1 wins"
