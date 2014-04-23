@@ -24,16 +24,18 @@
 (defn ask-first-or-second[]
 	(print-message "Would you like to go first or second?"))
 
-(defn get-first-or-second-input[]
+(defn get-first-or-second-input[opponent]
 	(if (= (get-input-from-user) "first")
     0 ;return 0, so Player 1 goes first
-    2)) ; return 2 so the computer goes first
+    (if (= opponent "dumb comber")
+      2
+      3))) ; return 2 so the computer goes first
 
-(defn get-starter[]
+(defn get-starter[opponent]
   (ask-first-or-second)
-  (get-first-or-second-input))
+  (get-first-or-second-input opponent))
 
 (defn set-starter[opponent]
   (if (or (= opponent "dumb computer") (= opponent "smart computer"))
-    (get-starter)
+    (get-starter opponent)
     (Integer. 0)))

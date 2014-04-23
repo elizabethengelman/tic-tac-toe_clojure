@@ -18,7 +18,8 @@
       (= opponent "human")
         (- 1 current-player)))
 
-(defn get-move[player-number current-board]
+(defn get-move[player-number current-board turn-number]
+  (print "player number: " player-number)
   (cond 
     (= player-number 0)
       (get-player-move player-number current-board)
@@ -27,7 +28,7 @@
     (= player-number 2)
       (get-computer-move current-board)
     (= player-number 3)
-      (get-smart-move current-board)))
+      (get-smart-move current-board turn-number)))
 
 (defn get-mark[player-number]
   (if (= player-number 0)
@@ -35,8 +36,8 @@
     (def mark "O"))
     mark)
 
-(defn update-board[current-board player-number] ;get move needs to be given to this board, instead of calling get-move
-    (assoc current-board (get-move player-number current-board) (get-mark player-number)))
+(defn update-board[current-board move mark] ;get move needs to be given to this board, instead of calling get-move
+    (assoc current-board move mark))
 
 (defn game-outcome[current-board]
   (cond 
