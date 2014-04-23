@@ -20,7 +20,7 @@
               (print-board current-board)
               (+ turn-counter 1)
               (switch-player opponent current-player)
-              (update-board current-board current-player)))))
+              (update-board current-board (get-move current-player current-board turn-counter) (get-mark current-player))))))
       (print-board board) 
       (print-message "Game over!")
       (print-message (game-outcome board))))
