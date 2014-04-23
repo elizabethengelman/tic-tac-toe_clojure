@@ -27,7 +27,7 @@
 (defn get-first-or-second-input[opponent]
 	(if (= (get-input-from-user) "first")
     0 ;return 0, so Player 1 goes first
-    (if (= opponent "dumb comber")
+    (if (= opponent "dumb computer")
       2
       3))) ; return 2 so the computer goes first
 

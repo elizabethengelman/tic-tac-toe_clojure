@@ -33,12 +33,17 @@
     	(it "returns the player-number 0 if the user wants to go first"
     		(should= 0
     			(with-in-str "first"
-    			(get-first-or-second-input))))
+    			(get-first-or-second-input "dumb computer"))))
 
-    	(it "returns the player-number 2 if the user wants to go second"
+    	(it "returns the player-number 2 if the user wants to go second against the dumb comp"
     		(should= 2
     			(with-in-str "second"
-    				(get-first-or-second-input)))))
+    				(get-first-or-second-input "dumb computer"))))
+
+        (it "returns the player-number 3 if the user wants to go second against the smart comp"
+            (should= 3
+                (with-in-str "second"
+                    (get-first-or-second-input "smart computer")))))
 
     (describe "set-starter"
         (it "returns 0 if the user is playing again another human"
@@ -49,9 +54,15 @@
                 (with-in-str "first"
                 (set-starter "dumb computer")))))
 
-        (it "returns 2 if the user wants to go second vs. the computer"
+
+        (it "returns 2 if the user wants to go second vs. the dumb computer"
             (should= 2
                 (with-in-str "second"
-                (set-starter "dumb computer")))))
+                (set-starter "dumb computer"))))
+
+        (it "returns 3 if the user wants to go second vs. the smart computer"
+            (should= 3
+                (with-in-str "second"
+                (set-starter "smart computer")))))
 
 
