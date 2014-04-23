@@ -3,6 +3,7 @@
         [tic_tac_toe_clojure.cli]))
 
 (declare minimized-move)
+(declare get-best-move)
 
 (defn get-computer-move[current-board]
   (print-message "The computer is going...")
@@ -16,16 +17,16 @@
 	(print "Turn number: " turn-number "\n")
 	(if (or (= turn-number 0) (= turn-number 1))
 		5
-		1))
+		(print(get-best-move current-board "O"))))
 
-(defn score[board]
+(defn get-score[board]
 	(cond 
 		(= (winner? board) "X")
-			-1
+			-1 ;lose
 		(= (winner? board) "O")
-			1
+			1 ; win
 		(not= "" (some #{""} (vals board)))
-		  0))
+		  0 )) ;tie
 
 (defn available-moves[board]
 	(for [space [1 2 3 4 5 6 7 8 ]
@@ -37,46 +38,54 @@
 	(assoc current-board move mark))							 ; how else could I do this? if include game, i have a cyclic 
 																								 ;dependency issue
 
-; (defn run-minimax[board player-number]
-; 		(for [empty-space (available-moves board)]
-; 			:let[updated-board (update-for-minimax board empty-space "O")]
-; 			)
+(defn switch-player-mark[current-player-mark]
+	(if (= current-player-mark "O")
+		"X"
+		"O"))
+
+(defn run-minimax[board current-player-mark]
+		(for [empty-space (available-moves board)
+				:let[updated-board (update-for-minimax board empty-space current-player-mark)]]
+			(cond
+				(game-over? updated-board) 
+					(get-score updated-board)
+				:else
+					(run-minimax updated-board (switch-player-mark current-player-mark)))))
+					
+(defn get-best-move[board computer-mark]	
+	(def possible-moves
+		(apply hash-map (interleave (flatten (run-minimax board computer-mark)) (available-moves board))))
+	(if (> (count possible-moves) 1)
+		(val (apply max-key possible-moves))
+		(vals possible-moves)))
 
 
-
-
-; 	)
-
-
-
-
-
-(defn maximized-move[current-board]
-	(loop [path-score 0
-				 available-moves (available-moves current-board)
-				 current-board current-board]
-		(if (game-over? current-board)
-			path-score
-			(recur 
-				(+ path-score (minimized-move current-board))
-				(rest available-moves)
-				(update-for-minimax current-board (first available-moves) "X")))))
+; (defn maximized-move[current-board]
+; 	(loop [path-score 0
+; 				 available-moves (available-moves current-board)
+; 				 current-board current-board]
+; 		(if (game-over? current-board)
+; 			path-score
+; 			(recur 
+; 				(+ path-score (minimized-move current-board))
+; 				(rest available-moves)
+; 				(update-for-minimax current-board (first available-moves) "X")))))
 			
 
-		; 	update the board with the first avail spot
-		; if game is NOT over return the path score, and do the minimaxin' again
-		; else if game is over, if there's a winner
+; 		; 	update the board with the first avail spot
+; 		; if game is NOT over return the path score, and do the minimaxin' again
+; 		; else if game is over, if there's a winner
 
-(defn minimized-move[current-board] ;just a randomized space for now
-  (loop [path-score 0
-  			 available-moves (available-moves current-board)
-  			 current-board current-board]
-  (if (game-over? current-board)
-  	(* -1 path-score)
-  	(recur
-  		(+ path-score (maximized-move current-board))
-  		(rest available-moves)
-  		(update-for-minimax current-board (first available-moves) "O")))))
+; (defn minimized-move[current-board] ;just a randomized space for now
+;   (loop [path-score 0
+;   			 available-moves (available-moves current-board)
+;   			 current-board current-board]
+;   (if (game-over? current-board)
+;   	(* -1 path-score)
+;   	(recur
+;   		(+ path-score (maximized-move current-board))
+;   		(rest available-moves)
+;   		(update-for-minimax current-board (first available-moves) "O")))))
 
 
 
