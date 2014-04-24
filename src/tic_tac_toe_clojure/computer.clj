@@ -15,21 +15,21 @@
 (defn get-smart-move[current-board turn-number]
 	(print-message "The smart computer is making a move...")
 	(print "Turn number: " turn-number "\n")
-	(if (or (= turn-number 0) (= turn-number 1))
-		5
-		(print(get-best-move current-board "O"))))
+	; (if (or (= turn-number 0) (= turn-number 1))
+	; 	5
+		(get-best-move current-board "O"))
 
-(defn get-score[board]
+(defn get-score[board player-marker]
 	(cond 
-		(= (winner? board) "X")
+		(= (winner? board) player-marker)
 			-1 ;lose
-		(= (winner? board) "O")
+		(not= (winner? board) player-marker)
 			1 ; win
 		(not= "" (some #{""} (vals board)))
 		  0 )) ;tie
 
 (defn available-moves[board]
-	(for [space [1 2 3 4 5 6 7 8 ]
+	(for [space [1 2 3 4 5 6 7 8 9]
     :let [empty-space (get board space)]
     :when (= "" empty-space)]
     space))
@@ -46,56 +46,35 @@
 (defn run-minimax[board current-player-mark]
 		(for [empty-space (available-moves board)
 				:let[updated-board (update-for-minimax board empty-space current-player-mark)]]
+			
 			(cond
-				(game-over? updated-board) 
-					(int(get-score updated-board))
+				; (= "O" (winner? board))
+				(game-over? updated-board)
+					(get-score updated-board current-player-mark)
 				:else
 					(run-minimax updated-board (switch-player-mark current-player-mark)))))
 					
 (defn get-best-move[board computer-mark]	
 	(def possible-moves
-		(apply hash-map (interleave (flatten (run-minimax board computer-mark)) (available-moves board))))
-	(print possible-moves)
-	(if (> (count possible-moves) 1)
-		(val (apply max-key possible-moves))
-		(first(vals possible-moves))))
+		(apply hash-map (interleave (available-moves board) (flatten(run-minimax board computer-mark)))))
+	(print possible-moves "\n")
+	(key (apply max-key val possible-moves)))
 
-
-; (defn maximized-move[current-board]
-; 	(loop [path-score 0
-; 				 available-moves (available-moves current-board)
-; 				 current-board current-board]
-; 		(if (game-over? current-board)
-; 			path-score
-; 			(recur 
-; 				(+ path-score (minimized-move current-board))
-; 				(rest available-moves)
-; 				(update-for-minimax current-board (first available-moves) "X")))))
 			
+	; (if (> (count possible-moves) 1)
+	; 	(val (apply max-key possible-moves))
+	; 	(first (vals possible-moves))))
 
-; 		; 	update the board with the first avail spot
-; 		; if game is NOT over return the path score, and do the minimaxin' again
-; 		; else if game is over, if there's a winner
-
-; (defn minimized-move[current-board] ;just a randomized space for now
-;   (loop [path-score 0
-;   			 available-moves (available-moves current-board)
-;   			 current-board current-board]
-;   (if (game-over? current-board)
-;   	(* -1 path-score)
-;   	(recur
-;   		(+ path-score (maximized-move current-board))
-;   		(rest available-moves)
-;   		(update-for-minimax current-board (first available-moves) "O")))))
+; (if (= "O" (winner? board))
 
 
 
 
-;   (loop [computer-move (rand-int 10)]
-;     (if (valid-move? computer-move current-board)
-;       computer-move
-;       (recur (rand-int 10)))))
+; (winning-move-available? player-marker board (generate-winning-combinations)) (get-score player-marker altered-board)
+; 					(= (count (empty-spaces board)) 1) (get-score player-marker board)
+; 					:else (* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) 1)))))))
 
+; _________________Notes_________________
 ;(dissoc board 1 ) -> removes the first element from the board
 
 ; (remove #{2} [1 2 3] )
