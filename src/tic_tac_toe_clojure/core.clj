@@ -23,6 +23,7 @@
               (update-board current-board (get-move current-player current-board turn-counter) (get-mark current-player))))))
       (print-board board) 
       (print-message "Game over!")
+      (print board)
       (print-message (game-outcome board))))
 
 (defn -main[]
