@@ -25,4 +25,11 @@
           (with-in-str "1"
           (get-player-move 0 current-board)))))
     
-    (it "continues to prompt player if they input an invalid move")))
+    (it "continues to prompt player if they input an invalid move"
+      (let [current-board { 1 "" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
+      (for [item {:item1 "10" :item2 "2"}]
+        (should= 2 (get-player-move 0 current-board)))))))
+
+      ; (should= 2
+      ;   (with-in-str "10" "1"
+      ;     (get-player-move 0 current-board)))))))

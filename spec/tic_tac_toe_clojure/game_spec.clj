@@ -17,7 +17,8 @@
       (let [current-board { 1 "X" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
         (should= 9
           (with-in-str "9"
-            (get-move 0 current-board 1))))))
+            (get-move 0 current-board 1)))))
+    (it "continues to prompt the user if they input an invalid move"))
 
   (describe "get-mark"
   	(it "gets the current player's mark (X or O)"
