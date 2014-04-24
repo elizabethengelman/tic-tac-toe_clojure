@@ -1,102 +1,17 @@
 (ns tic_tac_toe_clojure.board
-	   (:use [tic_tac_toe_clojure.player]
-           [tic_tac_toe_clojure.cli]))
+	   (:use [tic_tac_toe_clojure.game]))
 
-(def winners
-  [[1 2 3]
-   [4 5 6]
-   [7 8 9]
-   [1 4 7]
-   [2 5 8]
-   [3 6 9]
-   [1 5 9]
-   [3 5 7]
-   ])
 
-(defn display-empty-board[]
-  (println "__|__|__\n__|__|__\n  |  |  ")) 
+(defn create-new-board[]
+  { 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""})
 
 (defn create-numbered-board-for-display[]
   " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 ") ; don't want this to to actually print!
 
-(defn create-blank-board[]
-	{ 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""})
-
-(defn get-move[player-number]
-  (if (= player-number 0)
-    (def move (Integer. (get-player1-move)))
-    (def move (Integer. (get-player2-move))))
-    move)
-
-(defn get-mark[player-number]
-  (if (= player-number 0)
-    (def mark "X")
-    (def mark "O"))
-    mark)
-
 (defn update-board[current-board player-number]
-    (assoc current-board (get-move player-number) (get-mark player-number)))
-  
-; (defn print-out-the-winner[player-number]
-;   (if (= player-number 1)
-;     (print-message "Player 1 wins!")
-;     (print-message "Player 2 wins!")))
+    (assoc current-board (get-move player-number current-board) (get-mark player-number)))
 
-; (defn is-there-a-winner[current-board]
-;   (loop [current-line-index 0
-;          current-line (get winners current-line-index)]
-;     (if (and
-;         (apply = (map #(get current-board %)current-line))
-;         (not= (get current-board (get current-line 0)) "")
-;         )
-;       (get current-board (get current-line 0))
-;       (recur
-;         (+ current-line-index 1)
-;         (print-message "this is the current line"))
-
-;       )))
-
-(defn is-there-a-winner[current-board]
-  
-
-
-  (and
-    (apply = (map #(get current-board %) (get winners 0)))
-    (not= (get current-board (first (get winners 0))) "")))
-
-(defn check-game-status[board]
-  (cond
-    (is-there-a-winner board)
-      "over"
-    (not= "" (some #{""} (vals board)))    
-      "over"
-    :else
-      "in progress"))
-
-
-    ; (cond 
-    ;   (= (is-there-a-winner board) "O")
-    ;     "over"
-    ;   (= (is-there-a-winner board) "X")
-    ;     "over"
-    ;   (not= "" (some #{""} (vals board)))
-    ;     "over"
-    ;   :else
-    ;     "in progress"))
-
-(defn game-outcome[current-board]
-  (let [winner (is-there-a-winner current-board)]
-      (print-message (is-there-a-winner current-board))  
-
-      (cond 
-        (= winner true)
-          "Player 1 wins! Way to go X's!"
-        (= winner "O")
-          "Player 2 wins! Way to go O's!"
-        :else "It's a tie!")))
-
-
-(defn print-board[current-board] ;NEED TO FIX THIS!
+(defn print-board[current-board] ;NEED TO FIX THIS - there has to be a more efficient way to do this.
     (print (get current-board 1) " |"
     (get current-board 2) "|"
     (get current-board 3) "\n"
@@ -106,4 +21,3 @@
     (get current-board 7) "|"
     (get current-board 8) "|"
     (get current-board 9) "\n"))    
-

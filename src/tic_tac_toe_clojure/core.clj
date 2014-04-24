@@ -1,7 +1,9 @@
 (ns tic_tac_toe_clojure.core
     (:use [tic_tac_toe_clojure.board]
           [tic_tac_toe_clojure.player] 
-          [tic_tac_toe_clojure.cli]))
+          [tic_tac_toe_clojure.cli]
+          [tic_tac_toe_clojure.rules]
+          [tic_tac_toe_clojure.game]))
  
 (defn start-the-game[]
    (print-message "Welcome to Tic Tac Toe!\n")
@@ -9,26 +11,27 @@
    (print-message (create-numbered-board-for-display)))
 
 (defn game-loop[]
-  (let [current-board { 1 "" 2 "" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}] 
-
-    (current-board 
+  (let [current-board (create-new-board)] 
+      (def board   
       (loop [game "in progress"
              turn-counter 0 
 	           current-player 0 
              current-board current-board
              ] 
-      (if (= "over" (check-game-status current-board))
+      (if (game-over? current-board)
         current-board 
         (recur
           (print-board current-board)
           (+ turn-counter 1)
           (- 1 current-player)
-          (update-board current-board current-player)    
-          ))))
+          (update-board current-board current-player)))))
+    (print-board board) 
     (print-message "Game over!")
-    (print-message (game-outcome current-board)))
-    )
+    (print-message (game-outcome board))))
+
+
 
 (defn -main[]
    (start-the-game)
    (game-loop))
+  

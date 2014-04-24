@@ -1,10 +1,18 @@
 (ns tic_tac_toe_clojure.player
-	(:use [tic_tac_toe_clojure.cli]))
+	(:use [tic_tac_toe_clojure.cli]
+				[tic_tac_toe_clojure.utility]))
 
-(defn get-player1-move[]
-  (print-message "Player 1, where would you like to place your X?")
-  (get-input-from-user))
+(defn prompt-for-move[player-number]
+	(if (= player-number 0)
+		(print-message "Player 1, where would you like to place your X?")
+		(print-message "Player 2, where would you like to place your O?")))
 
-(defn get-player2-move[]
-  (print-message "Player 2, where would you like to place your O?")
-  (get-input-from-user))
+(defn get-move-from-player[]
+	(def move (get-input-from-user))
+	(if (is-a-number move)
+		(Integer. move)
+		0))
+
+(defn ask-for-move[player-number]
+	(prompt-for-move player-number)
+	(get-move-from-player))
