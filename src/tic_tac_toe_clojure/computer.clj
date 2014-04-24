@@ -48,16 +48,17 @@
 				:let[updated-board (update-for-minimax board empty-space current-player-mark)]]
 			(cond
 				(game-over? updated-board) 
-					(get-score updated-board)
+					(int(get-score updated-board))
 				:else
 					(run-minimax updated-board (switch-player-mark current-player-mark)))))
 					
 (defn get-best-move[board computer-mark]	
 	(def possible-moves
 		(apply hash-map (interleave (flatten (run-minimax board computer-mark)) (available-moves board))))
+	(print possible-moves)
 	(if (> (count possible-moves) 1)
 		(val (apply max-key possible-moves))
-		(vals possible-moves)))
+		(first(vals possible-moves))))
 
 
 ; (defn maximized-move[current-board]
