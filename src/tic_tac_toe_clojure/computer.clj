@@ -1,6 +1,7 @@
 (ns tic_tac_toe_clojure.computer
 	(:use [tic_tac_toe_clojure.rules]
-        [tic_tac_toe_clojure.cli]))
+        [tic_tac_toe_clojure.cli]
+        [tic_tac_toe_clojure.board]))
 
 (declare get-best-move)
 
@@ -48,16 +49,18 @@
 (defn run-minimax[board current-player-mark]
 		(for [empty-space (available-moves board)
 				:let[updated-board (update-for-minimax board empty-space current-player-mark)]]
-			; (do 
-			; 	(print "updated board right after let" updated-board)
+			(do 
+				(print "\nupdated board right after let\n")
+				(print-board updated-board)
+				; (map print (apply (partition 3 updated-board) ""))
 			(cond
-				; (= "O" (winner? updated-board)) 
 				(game-over? updated-board)
-					(get-score updated-board current-player-mark)
+					(* -1(get-score updated-board current-player-mark))
 				:else
-					
-						(run-minimax updated-board (switch-player-mark current-player-mark))))
-			)
+						; (def possible-moves
+						; (apply hash-map (interleave (available-moves board) (flatten(run-minimax board computer-mark)))))
+						(max (flatten (run-minimax updated-board (switch-player-mark current-player-mark)))))
+)			))	
 
 			
 
@@ -66,6 +69,7 @@
 	(def possible-moves
 		(apply hash-map (interleave (available-moves board) (flatten(run-minimax board computer-mark)))))
 	(print "these are the poss moves: " possible-moves "\n")
+	(print "minimax: " (run-minimax board computer-mark))
 	(key (apply max-key val possible-moves)))
 
 			
