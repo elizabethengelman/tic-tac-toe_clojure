@@ -2,7 +2,6 @@
 	(:use [tic_tac_toe_clojure.rules]
         [tic_tac_toe_clojure.cli]))
 
-(declare minimized-move)
 (declare get-best-move)
 
 (defn get-computer-move[current-board]
@@ -19,11 +18,11 @@
 	; 	5
 		(get-best-move current-board "O"))
 
-(defn get-score[board player-marker]
+(defn get-score[board player-mark]
 	(cond 
-		(= (winner? board) player-marker)
+		(and (not= (winner? board) player-mark) (not= (winner? board) nil))
 			-1 ;lose
-		(not= (winner? board) player-marker)
+		(= (winner? board) player-mark)
 			1 ; win
 		(not= "" (some #{""} (vals board)))
 		  0 )) ;tie
@@ -43,21 +42,30 @@
 		"X"
 		"O"))
 
+(defn revert-last-move[board move]
+	(update-for-minimax board move ""))
+
 (defn run-minimax[board current-player-mark]
 		(for [empty-space (available-moves board)
 				:let[updated-board (update-for-minimax board empty-space current-player-mark)]]
-			
+			; (do 
+			; 	(print "updated board right after let" updated-board)
 			(cond
-				; (= "O" (winner? board))
+				; (= "O" (winner? updated-board)) 
 				(game-over? updated-board)
 					(get-score updated-board current-player-mark)
 				:else
-					(run-minimax updated-board (switch-player-mark current-player-mark)))))
 					
+						(run-minimax updated-board (switch-player-mark current-player-mark))))
+			)
+
+			
+
+							
 (defn get-best-move[board computer-mark]	
 	(def possible-moves
 		(apply hash-map (interleave (available-moves board) (flatten(run-minimax board computer-mark)))))
-	(print possible-moves "\n")
+	(print "these are the poss moves: " possible-moves "\n")
 	(key (apply max-key val possible-moves)))
 
 			
@@ -65,14 +73,11 @@
 	; 	(val (apply max-key possible-moves))
 	; 	(first (vals possible-moves))))
 
-; (if (= "O" (winner? board))
 
 
 
 
-; (winning-move-available? player-marker board (generate-winning-combinations)) (get-score player-marker altered-board)
-; 					(= (count (empty-spaces board)) 1) (get-score player-marker board)
-; 					:else (* -1 (apply max (flatten (negamax altered-board (alternate-player-marker player-marker) 1)))))))
+
 
 ; _________________Notes_________________
 ;(dissoc board 1 ) -> removes the first element from the board
