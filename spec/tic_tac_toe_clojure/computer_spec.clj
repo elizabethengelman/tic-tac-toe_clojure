@@ -113,28 +113,33 @@
 				(run-minimax current-board "O")))))
 
 (describe "get-best-move"
-; 	(it "returns the best move for the computer"
-; 		(let [current-board { 1 "X" 2 "X" 3 "" 4 "O" 5 "O" 6 "" 7 "X" 8 "X" 9 "O"}]
-; 			(should= 6
-; 				(get-best-move current-board "O"))))
+	(it "returns the best move for the computer"
+		(let [current-board { 1 "X" 2 "X" 3 "" 4 "O" 5 "O" 6 "" 7 "X" 8 "X" 9 "O"}]
+			(should= 6
+				(get-best-move current-board "O"))))
 
-	; (it "returns 3"
-	; 	(let [current-board { 1 "X" 2 "X" 3 "" 4 "" 5 "" 6 "" 7 "" 8 "O" 9 ""}]
-	; 		(should= 3
-	; 			(get-best-move current-board "O"))))
+	(it "blocks its opponent"
+		(let [current-board { 1 "X" 2 "" 3 ""
+													4 "" 5 "X" 6 ""
+													7 "" 8 "O" 9 ""}]
+			(should= 9
+				(get-best-move current-board "O"))))
 
 	(it "returns 6"
 		(let [current-board { 1 "X" 2 "X" 3 ""
 													4 "O" 5 "O" 6 ""
 													7 "X" 8 "X" 9 ""}]
 			(should= 6
-				(get-best-move current-board "O")))))
+				(get-best-move current-board "O"))))
 
-	; (it "returns 5"
-	; 	(let [current-board {1 "X" 2 "O" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "O" 9 ""}]
+	; (it "tries for a win" ;moving to 9, O would still win - 5 is just the first win. Depth
+	; 	(let [current-board {1 "X" 2 "O" 3 "X"
+	; 												4 "" 5 "" 6 ""
+	; 												7 "" 8 "O" 9 ""}]
 	; 		(should= 5
 	; 			(get-best-move current-board "O")))))
 
 
 
+)
 
