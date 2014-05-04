@@ -15,7 +15,6 @@
 
 (defn get-smart-move[current-board turn-number]
 	(print-message "The smart computer is making a move...")
-	(print "Turn number: " turn-number "\n")
 		(get-best-move current-board "O"))
 
 (defn get-score[board player-mark]

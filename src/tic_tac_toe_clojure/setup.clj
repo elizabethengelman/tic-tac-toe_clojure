@@ -15,7 +15,15 @@
 
 (defn set-opponent[]
   (let [opponent (get-input-from-user)]
-    opponent))
+    (cond 
+      (= opponent "human")
+        "human"
+      (= opponent "dumb computer")
+        "dumb computer"
+      (= opponent "smart computer")
+        "smart computer"
+      :else "smart computer"  
+    )))
 
 (defn get-opponent[]
   (ask-for-opponent)
@@ -28,8 +36,8 @@
 	(if (= (get-input-from-user) "first")
     0 ;return 0, so Player 1 goes first
     (if (= opponent "dumb computer")
-      2
-      3))) ; return 2 so the computer goes first
+      2    ; return 2 so the dumb computer goes first
+      3))) ; return 3 so the smart computer goes first
 
 (defn get-starter[opponent]
   (ask-first-or-second)

@@ -19,7 +19,6 @@
         (- 1 current-player)))
 
 (defn get-move[player-number current-board turn-number]
-  (print "player number: " player-number)
   (cond 
     (= player-number 0)
       (get-player-move player-number current-board)
