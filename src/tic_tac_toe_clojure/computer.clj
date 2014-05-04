@@ -16,18 +16,16 @@
 (defn get-smart-move[current-board turn-number]
 	(print-message "The smart computer is making a move...")
 	(print "Turn number: " turn-number "\n")
-	; (if (or (= turn-number 0) (= turn-number 1))
-	; 	5
 		(get-best-move current-board "O"))
 
 (defn get-score[board player-mark]
 	(cond 
 		(and (not= (winner? board) player-mark) (not= (winner? board) nil))
-			-1 ;lose
+			-100 
 		(= (winner? board) player-mark)
-			1 ; win
+			100
 		(not= "" (some #{""} (vals board)))
-		  0 )) ;tie
+		  0 )) 
 
 (defn available-moves[board]
 	(for [space [1 2 3 4 5 6 7 8 9]
@@ -35,26 +33,24 @@
     :when (= "" empty-space)]
     space))
 
-(defn update-for-minimax[current-board move mark]; this is the same as the update-board method in the game ns
-	(assoc current-board move mark))							 ; how else could I do this? if include game, i have a cyclic 
-																								 ;dependency issue
-
+(defn update-for-minimax[current-board move mark]
+	(assoc current-board move mark))							 
+																								 
 (defn switch-player-mark[current-player-mark]
 	(if (= current-player-mark "O")
 		"X"
 		"O"))
 
-(defn score-move [board mark move]
-	(let [updated-board (update-for-minimax board move mark)]
+(defn score-move [depth board mark move]
+	(let [updated-board (update-for-minimax board move mark)
+		    updated-depth (inc depth)]
 		(if (game-over? updated-board)
-				[(get-score  updated-board mark) move]
-				[(* -1 (first (negamax updated-board (switch-player-mark mark)))) move])))
+				[(/ (get-score  updated-board mark) updated-depth) move updated-depth]
+				[(* -1 (first (negamax updated-board (switch-player-mark mark) updated-depth))) move updated-depth])))
 							
-(defn negamax [board mark]
+(defn negamax [board mark depth] 
 	(let [moves (available-moves board)]
-		(apply max-key first (map (partial score-move board mark) moves))))
-
+	  (apply max-key first (map (partial score-move depth board mark) moves)))) 
+ 
 (defn get-best-move[board computer-mark]	
-	(second (negamax board computer-mark)))
-
-	
+	(second (negamax board computer-mark 0)))

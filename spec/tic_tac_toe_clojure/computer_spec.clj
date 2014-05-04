@@ -48,13 +48,13 @@
 			(let [current-board { 1 "" 2 "X" 3 "X" 
 													4 "O" 5 "O" 6 "X" 
 													7 "O" 8 "X" 9 "X"}]
-			(should= -1 (get-score current-board "O"))))
+			(should= -100 (get-score current-board "O"))))
 
 		(it "returns 1 if current player will win (current player ='O')"
 			(let [current-board { 1 "" 2 "X" 3 "X" 
 													4 "O" 5 "O" 6 "O" 
 													7 "O" 8 "X" 9 "X"}]
-			(should= 1 (get-score current-board "O"))))
+			(should= 100 (get-score current-board "O"))))
 
 		(it "returns 0 if it will be tie (current player ='O')"
 			(let [current-board { 1 "X" 2 "O" 3 "X" 
@@ -66,7 +66,7 @@
 			(let [current-board { 1 "" 2 "X" 3 "X" 
 													4 "O" 5 "O" 6 "O" 
 													7 "O" 8 "X" 9 "X"}]
-			(should= -1 (get-score current-board "X")))))
+			(should= -100 (get-score current-board "X")))))
 
 (describe "get-best-move"
 	(it "returns the best move for the computer"
@@ -88,15 +88,10 @@
 			(should= 6
 				(get-best-move current-board "O"))))
 
-	; (it "tries for a win" ;moving to 9, O would still win - 5 is just the first win. Depth
-	; 	(let [current-board {1 "X" 2 "O" 3 "X" 
-	; 												4 "" 5 "" 6 "" 
-	; 												7 "" 8 "O" 9 ""}]
-	; 		(should= 5
-	; 			(get-best-move current-board "O")))))
+	(it "tries for a win" 
+		(let [current-board {1 "X" 2 "O" 3 "X" 
+													4 "" 5 "" 6 "" 
+													7 "" 8 "O" 9 ""}]
+			(should= 5
+				(get-best-move current-board "O"))))))
 
-
-
-)
-
-	)
