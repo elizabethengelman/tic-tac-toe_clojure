@@ -1,6 +1,7 @@
 (ns tic_tac_toe_clojure.player
 	(:use [tic_tac_toe_clojure.cli]
-				[tic_tac_toe_clojure.utility]))
+				[tic_tac_toe_clojure.utility]
+				[tic_tac_toe_clojure.rules]))
 
 (defn prompt-for-move[player-number]
 	(if (= player-number 0)
@@ -13,6 +14,12 @@
 		(Integer. move)
 		0))
 
-(defn ask-for-move[player-number]
+(defn player-move[player-number]
 	(prompt-for-move player-number)
 	(get-move-from-player))
+
+(defn get-player-move[player-number current-board]
+    (loop [move (player-move player-number)]
+      (if (valid-move? move current-board)
+        move
+        (recur(player-move player-number)))))

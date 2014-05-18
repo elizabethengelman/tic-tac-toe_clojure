@@ -70,5 +70,16 @@
 
 		(it "returns O if O wins"
 			(let [current-board { 1 "O" 2 "O" 3 "O" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
-				(should= "O" (who-wins? current-board)))))
+				(should= "O" (who-wins? current-board))))
+
+	(describe "valid-move?"
+		(it "returns true if valid"
+			(let [current-board { 1 "" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
+				(should= true (valid-move? 1 current-board))))
+	  (it "returns false if the space is already taken"
+	  	(let [current-board { 1 "" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
+	  		(should= false (valid-move? 2 current-board))))
+		(it "returns false if the move is out of the scope of the board"
+			(let [current-board { 1 "" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
+				(should= false (valid-move? 0 current-board)))))		)
 	
