@@ -21,7 +21,7 @@
 		(get-best-move current-board "O"))
 
 (defn get-score[board player-mark]
-	(cond 
+	(cond
 		(and (not= (winner? board) player-mark) (not= (winner? board) nil))
 			-1 ;lose
 		(= (winner? board) player-mark)
@@ -36,7 +36,7 @@
     space))
 
 (defn update-for-minimax[current-board move mark]; this is the same as the update-board method in the game ns
-	(assoc current-board move mark))							 ; how else could I do this? if include game, i have a cyclic 
+	(assoc current-board move mark))							 ; how else could I do this? if include game, i have a cyclic
 																								 ;dependency issue
 
 (defn switch-player-mark[current-player-mark]
@@ -49,12 +49,12 @@
 		(if (game-over? updated-board)
 				[(get-score  updated-board mark) move]
 				[(* -1 (first (negamax updated-board (switch-player-mark mark)))) move])))
-							
+
 (defn negamax [board mark]
 	(let [moves (available-moves board)]
 		(apply max-key first (map (partial score-move board mark) moves))))
 
-(defn get-best-move[board computer-mark]	
+(defn get-best-move[board computer-mark]
 	(second (negamax board computer-mark)))
 
-	
+

@@ -23,4 +23,4 @@
       (let [current-board { 1 "" 2 "X" 3 "X" 4 "" 5 "" 6 "" 7 "" 8 "" 9 ""}]
         (should= 1
           (with-in-str "1"
-          (get-player-move 0 current-board)))))
+          (get-player-move 0 current-board)))))))
